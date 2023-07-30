@@ -21,9 +21,11 @@ class UserController extends Controller
         return new UserCollection(User::all());
     }
 
-    public function show(User $user)
+    public function show(Request $request)
     {
-        return new UserResource($user);
+        $user = $request->user()->makeHidden(['password']);
+        
+        return $user;
     }
 
     public function store(StoreUpdateUserRequest $request)
@@ -45,24 +47,6 @@ class UserController extends Controller
             'token' => $token,
         ]);
     }
-
-    public function verify(Request $request)
-    {
-        $user = $request->user();
-    
-        if ($user) {
-            $token = $user->tokens->first();
-
-            return response()->json([
-                'user' => new UserResource($user),
-                'token' => $token,
-            ]);
-        }
-
-        return response()->json(['error' => 'unauthenticated'], 401);
-
-    }
-
 
     public function update(Request $request, User $user)
     {

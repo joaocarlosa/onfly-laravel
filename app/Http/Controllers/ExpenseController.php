@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Expense;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\ExpenseRequest;
-
+use App\Mail\ExpenseCreated;
+use Illuminate\Support\Facades\Mail;
 
 class ExpenseController extends Controller
 {
@@ -15,20 +15,25 @@ class ExpenseController extends Controller
         return Expense::all();
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Expense $expense)
     {
         $request->validate([
             'description' => 'required',
             'value' => 'required',
-        ]);
-    
-        $expense = new Expense;
+        ]);        
         $expense->description = $request->description;
         $expense->value = $request->value;
         $expense->user_id = $request->user()->id;
         $expense->save();
-    
-        return response()->json($expense, 201);
+        
+        try {
+            Mail::to($request->user())->send(new ExpenseCreated($expense));
+        } catch (\Exception $e) {
+            $emailMessage = 'Falha ao enviar o e-mail: ' . $e->getMessage();
+        }
+
+        return response()->json(['expense' => $expense, 'emailMessage' => $emailMessage], 201);
+
     }
 
     public function show(Expense $expense)

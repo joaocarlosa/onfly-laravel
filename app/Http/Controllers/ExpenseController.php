@@ -8,18 +8,26 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreExpenseRequest;
 
 
-class ExpensesController extends Controller
+class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Auth::user()->expenses;
-
-        return response()->json($expenses);
+        return Expense::all();
     }
 
-    public function store(StoreExpenseRequest $request)
+    public function store(Request $request)
     {
-        $expense = Auth::user()->expenses()->create($request->validated());
+        $request->validate([
+            'description' => 'required',
+            'value' => 'required',
+        ]);
+    
+        $expense = new Expense;
+        $expense->description = $request->description;
+        $expense->value = $request->value;
+        $expense->user_id = $request->user()->id;
+        $expense->save();
+    
         return response()->json($expense, 201);
     }
 

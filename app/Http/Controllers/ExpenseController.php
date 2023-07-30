@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Expense;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreExpenseRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Requests\ExpenseRequest;
 
 
 class ExpenseController extends Controller
@@ -32,35 +32,29 @@ class ExpenseController extends Controller
     }
 
     public function show(Expense $expense)
-    {
-        
-        if (Auth::id() !== $expense->user_id) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
+    {   
 
         return response()->json($expense);
     }
 
-    public function update(StoreExpenseRequest $request, Expense $expense)
+    public function update(ExpenseRequest $request, $id)
     {
         
-        if (Auth::id() !== $expense->user_id) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
+        $expense = Expense::where('id', $id)
+                            ->where('user_id', auth()->id())
+                            ->firstOrFail();
 
-        $expense->update($request->validated());
+        $expense->update($request->only(['description', 'value']));
 
         return response()->json($expense);
+        
     }
 
     public function destroy(Expense $expense)
     {
-        if (Auth::id() !== $expense->user_id) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
         $expense->delete();
 
-        return response()->json(null, 204);
+        return response()->json(['success' => 'Excluído com sucesso'], 200);
+
     }
 }

@@ -16,11 +16,6 @@ use App\Http\Middleware\CheckUserToken;
 class UserController extends Controller
 {
 
-    public function index()
-    {
-        return new UserCollection(User::all());
-    }
-
     public function show(Request $request)
     {
         $user = $request->user()->makeHidden(['password']);
@@ -46,20 +41,6 @@ class UserController extends Controller
             'user' => new UserResource($user),
             'token' => $token,
         ]);
-    }
-
-    public function update(Request $request, User $user)
-    {
-        $user->update($request->all());
-
-        return new UserResource($user);
-    }
-
-    public function destroy(User $user)
-    {
-        $user->delete();
-
-        return response()->json(null, 204);
     }
 
     

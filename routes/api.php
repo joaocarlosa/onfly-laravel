@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\ExpenseController;
 
-Route::post('users/new', UserController::class);
+Route::post('users/new', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {    
     Route::get('users/me', [UserController::class, 'show']);

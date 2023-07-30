@@ -4,13 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-
+use Laravel\Sanctum\PersonalAccessToken;
+use App\Http\Middleware\CheckUserToken;
 
 
 class UserController extends Controller
@@ -26,9 +26,9 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateUserRequest $request)
     {
-        $validated = $request->all();
+        $validated = $request->validated();
 
         if (User::where('email', $validated['email'])->exists()) {
             return response()->json(['error' => 'User already exists'], 422);
@@ -44,6 +44,23 @@ class UserController extends Controller
             'user' => new UserResource($user),
             'token' => $token,
         ]);
+    }
+
+    public function verify(Request $request)
+    {
+        $user = $request->user();
+    
+        if ($user) {
+            $token = $user->tokens->first();
+
+            return response()->json([
+                'user' => new UserResource($user),
+                'token' => $token,
+            ]);
+        }
+
+        return response()->json(['error' => 'Usuário não autenticado'], 401);
+
     }
 
 

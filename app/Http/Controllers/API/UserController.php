@@ -59,7 +59,7 @@ class UserController extends Controller
             ]);
         }
 
-        return response()->json(['error' => 'Usuário não autenticado'], 401);
+        return response()->json(['error' => 'unauthenticated'], 401);
 
     }
 

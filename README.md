@@ -32,7 +32,7 @@ Todos os endpoints, com exceção do POST `/api/users/new`, exigem autenticaçã
 #### POST /api/users/new
 
 Cria um novo usuário.
-Endpoint: POST /api/users/new
+Endpoint: POST `/api/users/new`
 
 ```sh
 curl --location --request POST 'http://localhost:8000/api/users/new' \
@@ -48,7 +48,7 @@ curl --location --request POST 'http://localhost:8000/api/users/new' \
 Recuperar informações do usuário
 Obtenha informações sobre o usuário logado.
 
-Endpoint: GET /api/users/me
+Endpoint: GET `/api/users/me`
 
 ```sh
 curl --location --request GET 'http://localhost:8000/api/users/me' \
@@ -60,7 +60,7 @@ curl --location --request GET 'http://localhost:8000/api/users/me' \
 Para acessar os seguintes endpoints, é necessário passar o token de autenticação do usuário.
 
 Recuperar todas as despesas
-Endpoint: GET /api/expense
+Endpoint: GET `/api/expense`
 
 
 ```sh
@@ -69,7 +69,7 @@ curl --location --request GET 'http://localhost:8000/api/expense' \
 ```
 
 Recuperar uma despesa específica
-Endpoint: GET /api/expense/{id}
+Endpoint: GET `/api/expense/{id}`
 
 ```sh
 curl --location --request GET 'http://localhost:8000/api/expense/8' \
@@ -78,7 +78,7 @@ curl --location --request GET 'http://localhost:8000/api/expense/8' \
 
 
 Criar uma nova despesa
-Endpoint: POST /api/expense
+Endpoint: POST `/api/expense`
 
 ```sh
 curl --location --request POST 'http://localhost:8000/api/expense' \
@@ -91,7 +91,7 @@ curl --location --request POST 'http://localhost:8000/api/expense' \
 ```
 
 Atualizar uma despesa existente
-Endpoint: PUT /api/expense/{id}
+Endpoint: PUT `/api/expense/{id}`
 
 ```sh
 curl --location --request PUT 'http://localhost:8000/api/expense/9' \
@@ -103,7 +103,7 @@ curl --location --request PUT 'http://localhost:8000/api/expense/9' \
 }'
 ```
 Remover uma despesa
-Endpoint: DELETE /api/expense/{id}
+Endpoint: DELETE `/api/expense/{id}`
 
 ```sh
 curl --location --request DELETE 'http://localhost:8000/api/expense/43' \

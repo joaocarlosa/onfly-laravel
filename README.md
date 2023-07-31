@@ -34,7 +34,7 @@ Cria um novo usuário.
 Endpoint: POST `/api/users/new`
 
 ```sh
-curl --location --request POST 'http://localhost:8000/api/users/new' \
+curl -X -H POST 'http://localhost:8000/api/users/new' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"name": "user",
@@ -62,7 +62,7 @@ Obtenha informações sobre o usuário logado.
 Endpoint: GET `/api/users/me`
 
 ```sh
-curl --location --request GET 'http://localhost:8000/api/users/me' \
+curl -X -H GET 'http://localhost:8000/api/users/me' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 Retorno:
@@ -88,7 +88,7 @@ Endpoint: GET `/api/expense`
 
 
 ```sh
-curl --location --request GET 'http://localhost:8000/api/expense' \
+curl -X -H GET 'http://localhost:8000/api/expense' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 
@@ -118,7 +118,7 @@ Retorno:
 Endpoint: GET `/api/expense/{id}`
 
 ```sh
-curl --location --request GET 'http://localhost:8000/api/expense/8' \
+curl -X -H GET 'http://localhost:8000/api/expense/$EXPENSE_ID' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 
@@ -140,7 +140,7 @@ Retorno:
 Endpoint: POST `/api/expense`
 
 ```sh
-curl --location --request POST 'http://localhost:8000/api/expense' \
+curl -X -H POST 'http://localhost:8000/api/expense' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer seu_token_aqui' \
 --data-raw '{
@@ -170,7 +170,7 @@ Retorno:
 Endpoint: PUT `/api/expense/{id}`
 
 ```sh
-curl --location --request PUT 'http://localhost:8000/api/expense/9' \
+curl -X -H PUT 'http://localhost:8000/api/expense/$EXPENSE_ID' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer seu_token_aqui' \
 --data-raw '{
@@ -196,7 +196,7 @@ Retorno:
 Endpoint: DELETE `/api/expense/{id}`
 
 ```sh
-curl --location --request DELETE 'http://localhost:8000/api/expense/43' \
+curl -X -H DELETE 'http://localhost:8000/api/expense/$EXPENSE_ID' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 

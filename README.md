@@ -63,7 +63,7 @@ Obtenha informações sobre o usuário logado.
 Endpoint: GET `/api/users/me`
 
 ```sh
-curl -X GET -H "Authorization: Bearer seu_token_aqui" \
+curl -X GET -H "Authorization: Bearer seu_token_aqui"
 http://localhost:8000/api/users/me
 
 ```
@@ -90,7 +90,7 @@ Endpoint: GET `/api/expense`
 
 
 ```sh
-curl -X GET -H "Authorization: Bearer seu_token_aqui" \
+curl -X GET -H "Authorization: Bearer seu_token_aqui"
 http://localhost:8000/api/expense
 
 ```
@@ -121,7 +121,7 @@ Retorno:
 Endpoint: GET `/api/expense/{id}`
 
 ```sh
-curl -X GET -H "Authorization: Bearer seu_token_aqui" \
+curl -X GET -H "Authorization: Bearer seu_token_aqui"
 http://localhost:8000/api/expense/$ID
 
 ```
@@ -144,11 +144,11 @@ Retorno:
 Endpoint: POST `/api/expense`
 
 ```sh
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d \
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d
 '{
 	"value": "20",
 	"description": "netflix"
-}' \
+}'
 http://localhost/api/expense
 
 ```
@@ -174,11 +174,11 @@ Retorno:
 Endpoint: PUT `/api/expense/{id}`
 
 ```sh
-curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d \
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d
 '{
 	"value": "30",
 	"description": "Nova descrição"
-}' \
+}'
 http://localhost:8000/api/expense/$ID
 
 ```
@@ -200,8 +200,8 @@ Retorno:
 Endpoint: DELETE `/api/expense/{id}`
 
 ```sh
-curl -X DELETE -H "Authorization: Bearer seu_token_aqui" \
-http://localhost:8000/api/expense/$id
+curl -X DELETE -H "Authorization: Bearer seu_token_aqui"
+http://localhost:8000/api/expense/$ID
 
 ```
 

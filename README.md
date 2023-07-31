@@ -29,9 +29,8 @@ Todos os endpoints, com exceção do POST `/api/users/new`, exigem autenticaçã
 
 ### Users
 
-#### POST /api/users/new
-
 Cria um novo usuário.
+
 Endpoint: POST `/api/users/new`
 
 ```sh
@@ -45,7 +44,7 @@ curl --location --request POST 'http://localhost:8000/api/users/new' \
 
 ```
 
-Recuperar informações do usuário
+### Recuperar informações do usuário
 Obtenha informações sobre o usuário logado.
 
 Endpoint: GET `/api/users/me`
@@ -68,7 +67,7 @@ curl --location --request GET 'http://localhost:8000/api/expense' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 
-Recuperar uma despesa específica
+### Recuperar uma despesa específica
 Endpoint: GET `/api/expense/{id}`
 
 ```sh
@@ -77,7 +76,7 @@ curl --location --request GET 'http://localhost:8000/api/expense/8' \
 ```
 
 
-Criar uma nova despesa
+### Criar uma nova despesa
 Endpoint: POST `/api/expense`
 
 ```sh
@@ -90,7 +89,7 @@ curl --location --request POST 'http://localhost:8000/api/expense' \
 }'
 ```
 
-Atualizar uma despesa existente
+### Atualizar uma despesa existente
 Endpoint: PUT `/api/expense/{id}`
 
 ```sh
@@ -102,7 +101,9 @@ curl --location --request PUT 'http://localhost:8000/api/expense/9' \
 	"description": "Nova descrição"
 }'
 ```
-Remover uma despesa
+
+
+### Remover uma despesa
 Endpoint: DELETE `/api/expense/{id}`
 
 ```sh

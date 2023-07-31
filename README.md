@@ -47,12 +47,12 @@ Retorno:
 
 ```json
 {
-	"user": {
-		"id": 25,
-		"name": "user",
-		"email": "user@email.com"
-	},
-	"token": "token"
+"user": {
+    "id": 25,
+    "name": "user",
+    "email": "user@email.com"
+},
+"token": "token"
 }
 ```
 
@@ -69,13 +69,13 @@ Retorno:
 
 ```json
 {
-	"id": 1,
-	"name": "user",
-	"email": "user@email.com",
-	"email_verified_at": null,
-	"remember_token": null,
-	"created_at": "2023-07-30T08:13:32.000000Z",
-	"updated_at": "2023-07-30T08:13:32.000000Z"
+"id": 1,
+"name": "user",
+"email": "user@email.com",
+"email_verified_at": null,
+"remember_token": null,
+"created_at": "2023-07-30T08:13:32.000000Z",
+"updated_at": "2023-07-30T08:13:32.000000Z"
 }
 ```
 
@@ -96,20 +96,20 @@ Retorno:
 
 ```json
 {
-    "id": 1,
-    "description": "netflix",
-    "user_id": 10,
-    "value": "25.00",
-    "created_at": "2023-07-30T21:00:28.000000Z",
-    "updated_at": "2023-07-30T21:00:28.000000Z"
+"id": 1,
+"description": "netflix",
+"user_id": 10,
+"value": "25.00",
+"created_at": "2023-07-30T21:00:28.000000Z",
+"updated_at": "2023-07-30T21:00:28.000000Z"
 },
 {
-    "id": 2,
-    "description": "disneyPlus",
-    "user_id": 10,
-    "value": "35.00",
-    "created_at": "2023-07-30T21:00:29.000000Z",
-    "updated_at": "2023-07-30T21:00:29.000000Z"
+"id": 2,
+"description": "disneyPlus",
+"user_id": 10,
+"value": "35.00",
+"created_at": "2023-07-30T21:00:29.000000Z",
+"updated_at": "2023-07-30T21:00:29.000000Z"
 }
 
 ```
@@ -126,12 +126,12 @@ Retorno:
 
 ```json
 { 
-    "id": 8,
-    "description": "youtube",
-    "user_id": 10,
-    "value": "22.00",
-    "created_at": "2023-07-30T21:00:28.000000Z",
-    "updated_at": "2023-07-30T21:00:28.000000Z"
+"id": 8,
+"description": "youtube",
+"user_id": 10,
+"value": "22.00",
+"created_at": "2023-07-30T21:00:28.000000Z",
+"updated_at": "2023-07-30T21:00:28.000000Z"
 }
 ```
 
@@ -153,15 +153,15 @@ Retorno:
 
 ```json
 {
-	"expense": {
-		"description": "youtube",
-		"value": "-20",
-		"user_id": 14,
-		"updated_at": "2023-07-31T14:42:19.000000Z",
-		"created_at": "2023-07-31T14:42:19.000000Z",
-		"id": 51
-	},
-	"emailMessage": "Sent with success."
+"expense": {
+    "description": "youtube",
+    "value": "-20",
+    "user_id": 14,
+    "updated_at": "2023-07-31T14:42:19.000000Z",
+    "created_at": "2023-07-31T14:42:19.000000Z",
+    "id": 51
+},
+"emailMessage": "Sent with success."
 }
 ```
 
@@ -182,12 +182,12 @@ Retorno:
 
 ```json
 {
-	"id": 9,
-	"description": "Nova descrição",
-	"user_id": 14,
-	"value": "30.00",
-	"created_at": "2023-07-30T20:58:29.000000Z",
-	"updated_at": "2023-07-31T14:42:05.000000Z"
+"id": 9,
+"description": "Nova descrição",
+"user_id": 14,
+"value": "30.00",
+"created_at": "2023-07-30T20:58:29.000000Z",
+"updated_at": "2023-07-31T14:42:05.000000Z"
 }
 
 ```
@@ -204,6 +204,6 @@ Retorno:
 
 ```json
 {
-    "success": "successfully deleted"
+"success": "successfully deleted"
 }
 ```

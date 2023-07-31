@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Http\Requests\ExpenseRequest;
-use App\Mail\ExpenseCreated;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Controller;
+use App\Notifications\ExpenseCreated;
 
 class ExpenseController extends Controller
 {
@@ -27,12 +27,13 @@ class ExpenseController extends Controller
         $expense->save();
         
         try {
-            Mail::to($request->user())->send(new ExpenseCreated($expense));
+            $request->user()->notify(new ExpenseCreated($expense));
+            $notifyMessage = 'Sent with success';
         } catch (\Exception $e) {
-            $emailMessage = 'Falha ao enviar o e-mail: ' . $e->getMessage();
+            $notifyMessage = 'Sending failed: ' . $e->getMessage();
         }
 
-        return response()->json(['expense' => $expense, 'emailMessage' => $emailMessage], 201);
+        return response()->json(['expense' => $expense, 'emailMessage' => $notifyMessage], 201);
 
     }
 
@@ -59,7 +60,7 @@ class ExpenseController extends Controller
     {
         $expense->delete();
 
-        return response()->json(['success' => 'Excluído com sucesso'], 200);
+        return response()->json(['success' => 'successfully deleted'], 200);
 
     }
 }

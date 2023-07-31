@@ -30,7 +30,7 @@ class ExpenseRequest extends FormRequest
 
         return [
             'description' => 'required|string|max:191',
-            'value' => ['required', 'numeric', 'min:0', 'regex:/^[0-9]*\.?[0-9]+$/'],
+            'value' => ['required', 'numeric', 'min:0'],
 
         ];
     }
@@ -49,6 +49,6 @@ class ExpenseRequest extends FormRequest
 
     protected function failedAuthorization()
     {
-        throw new \Illuminate\Auth\Access\AuthorizationException('Você não está autorizado a realizar esta operação.');
+        throw new \Illuminate\Auth\Access\AuthorizationException('You are not authorized to perform this operation.');
     }
 }

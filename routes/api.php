@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
-use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\API\ExpenseController;
 
 Route::post('users/new', [UserController::class, 'store']);
 

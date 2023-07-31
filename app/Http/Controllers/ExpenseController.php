@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Http\Requests\ExpenseRequest;
-use App\Notifications\ExpenseCreated;
+use App\Mail\ExpenseCreated;
 use Illuminate\Support\Facades\Mail;
 
 class ExpenseController extends Controller
@@ -20,21 +20,19 @@ class ExpenseController extends Controller
         $request->validate([
             'description' => 'required',
             'value' => 'required',
-        ]); 
-
+        ]);        
         $expense->description = $request->description;
         $expense->value = $request->value;
         $expense->user_id = $request->user()->id;
         $expense->save();
         
         try {
-            $request->user()->notify(new ExpenseCreated($expense));
-            $notifyMessage = 'Notificação enviada com sucesso!';
+            Mail::to($request->user())->send(new ExpenseCreated($expense));
         } catch (\Exception $e) {
-            $notifyMessage = 'Falha ao enviar notificação: ' . $e->getMessage();
+            $emailMessage = 'Falha ao enviar o e-mail: ' . $e->getMessage();
         }
-    
-        return response()->json(['expense' => $expense, 'notifyMessage' => $notifyMessage], 201);
+
+        return response()->json(['expense' => $expense, 'emailMessage' => $emailMessage], 201);
 
     }
 

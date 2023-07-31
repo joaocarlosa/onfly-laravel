@@ -95,22 +95,22 @@ curl --location --request GET 'http://localhost:8000/api/expense' \
 Retorno:
 
 ```json
-	{
-		"id": 1,
-		"description": "netflix",
-		"user_id": 10,
-		"value": "25.00",
-		"created_at": "2023-07-30T21:00:28.000000Z",
-		"updated_at": "2023-07-30T21:00:28.000000Z"
-	},
-	{
-		"id": 2,
-		"description": "disneyPlus",
-		"user_id": 10,
-		"value": "35.00",
-		"created_at": "2023-07-30T21:00:29.000000Z",
-		"updated_at": "2023-07-30T21:00:29.000000Z"
-	},
+{
+    "id": 1,
+    "description": "netflix",
+    "user_id": 10,
+    "value": "25.00",
+    "created_at": "2023-07-30T21:00:28.000000Z",
+    "updated_at": "2023-07-30T21:00:28.000000Z"
+},
+{
+    "id": 2,
+    "description": "disneyPlus",
+    "user_id": 10,
+    "value": "35.00",
+    "created_at": "2023-07-30T21:00:29.000000Z",
+    "updated_at": "2023-07-30T21:00:29.000000Z"
+}
 
 ```
 
@@ -125,15 +125,14 @@ curl --location --request GET 'http://localhost:8000/api/expense/8' \
 Retorno:
 
 ```json
-    { 
-		"id": 8,
-		"description": "youtube",
-		"user_id": 10,
-		"value": "22.00",
-		"created_at": "2023-07-30T21:00:28.000000Z",
-		"updated_at": "2023-07-30T21:00:28.000000Z"
-	},
-
+{ 
+    "id": 8,
+    "description": "youtube",
+    "user_id": 10,
+    "value": "22.00",
+    "created_at": "2023-07-30T21:00:28.000000Z",
+    "updated_at": "2023-07-30T21:00:28.000000Z"
+}
 ```
 
 
@@ -205,6 +204,6 @@ Retorno:
 
 ```json
 {
-	"success": "successfully deleted"
+    "success": "successfully deleted"
 }
 ```

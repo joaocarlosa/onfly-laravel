@@ -43,6 +43,18 @@ curl --location --request POST 'http://localhost:8000/api/users/new' \
 }'
 
 ```
+Retorno:
+
+```json
+{
+	"user": {
+		"id": 25,
+		"name": "user",
+		"email": "user@email.com"
+	},
+	"token": "token"
+}
+```
 
 ### Recuperar informações do usuário
 Obtenha informações sobre o usuário logado.
@@ -52,6 +64,19 @@ Endpoint: GET `/api/users/me`
 ```sh
 curl --location --request GET 'http://localhost:8000/api/users/me' \
 --header 'Authorization: Bearer seu_token_aqui'
+```
+Retorno:
+
+```json
+{
+	"id": 1,
+	"name": "user",
+	"email": "user@email.com",
+	"email_verified_at": null,
+	"remember_token": null,
+	"created_at": "2023-07-30T08:13:32.000000Z",
+	"updated_at": "2023-07-30T08:13:32.000000Z"
+}
 ```
 
 #### Despesas:
@@ -67,12 +92,48 @@ curl --location --request GET 'http://localhost:8000/api/expense' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 
+Retorno:
+
+```json
+	{
+		"id": 1,
+		"description": "netflix",
+		"user_id": 10,
+		"value": "25.00",
+		"created_at": "2023-07-30T21:00:28.000000Z",
+		"updated_at": "2023-07-30T21:00:28.000000Z"
+	},
+	{
+		"id": 2,
+		"description": "disneyPlus",
+		"user_id": 10,
+		"value": "35.00",
+		"created_at": "2023-07-30T21:00:29.000000Z",
+		"updated_at": "2023-07-30T21:00:29.000000Z"
+	},
+
+```
+
 ### Recuperar uma despesa específica
 Endpoint: GET `/api/expense/{id}`
 
 ```sh
 curl --location --request GET 'http://localhost:8000/api/expense/8' \
 --header 'Authorization: Bearer seu_token_aqui'
+```
+
+Retorno:
+
+```json
+    { 
+		"id": 8,
+		"description": "youtube",
+		"user_id": 10,
+		"value": "22.00",
+		"created_at": "2023-07-30T21:00:28.000000Z",
+		"updated_at": "2023-07-30T21:00:28.000000Z"
+	},
+
 ```
 
 
@@ -89,6 +150,23 @@ curl --location --request POST 'http://localhost:8000/api/expense' \
 }'
 ```
 
+Retorno:
+
+```json
+{
+	"expense": {
+		"description": "youtube",
+		"value": "-20",
+		"user_id": 14,
+		"updated_at": "2023-07-31T14:42:19.000000Z",
+		"created_at": "2023-07-31T14:42:19.000000Z",
+		"id": 51
+	},
+	"emailMessage": "Sent with success."
+}
+```
+
+
 ### Atualizar uma despesa existente
 Endpoint: PUT `/api/expense/{id}`
 
@@ -101,7 +179,19 @@ curl --location --request PUT 'http://localhost:8000/api/expense/9' \
 	"description": "Nova descrição"
 }'
 ```
+Retorno:
 
+```json
+{
+	"id": 9,
+	"description": "Nova descrição",
+	"user_id": 14,
+	"value": "30.00",
+	"created_at": "2023-07-30T20:58:29.000000Z",
+	"updated_at": "2023-07-31T14:42:05.000000Z"
+}
+
+```
 
 ### Remover uma despesa
 Endpoint: DELETE `/api/expense/{id}`
@@ -111,3 +201,10 @@ curl --location --request DELETE 'http://localhost:8000/api/expense/43' \
 --header 'Authorization: Bearer seu_token_aqui'
 ```
 
+Retorno:
+
+```json
+{
+	"success": "successfully deleted"
+}
+```

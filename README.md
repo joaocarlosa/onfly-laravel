@@ -34,13 +34,14 @@ Cria um novo usuário.
 Endpoint: POST `/api/users/new`
 
 ```sh
-curl -X -H POST 'http://localhost:8000/api/users/new' \
---header 'Content-Type: application/json' \
---data-raw '{
+curl -X POST -H "Content-Type: application/json" -d
+'{
 	"name": "user",
     "email": "user@email.com",
     "password": "pass"
 }'
+http://localhost:8000/api/users/new
+
 
 ```
 Retorno:
@@ -62,8 +63,9 @@ Obtenha informações sobre o usuário logado.
 Endpoint: GET `/api/users/me`
 
 ```sh
-curl -X -H GET 'http://localhost:8000/api/users/me' \
---header 'Authorization: Bearer seu_token_aqui'
+curl -X GET -H "Authorization: Bearer seu_token_aqui" \
+http://localhost:8000/api/users/me
+
 ```
 Retorno:
 
@@ -88,8 +90,9 @@ Endpoint: GET `/api/expense`
 
 
 ```sh
-curl -X -H GET 'http://localhost:8000/api/expense' \
---header 'Authorization: Bearer seu_token_aqui'
+curl -X GET -H "Authorization: Bearer seu_token_aqui" \
+http://localhost:8000/api/expense
+
 ```
 
 Retorno:
@@ -118,8 +121,9 @@ Retorno:
 Endpoint: GET `/api/expense/{id}`
 
 ```sh
-curl -X -H GET 'http://localhost:8000/api/expense/$EXPENSE_ID' \
---header 'Authorization: Bearer seu_token_aqui'
+curl -X GET -H "Authorization: Bearer seu_token_aqui" \
+http://localhost:8000/api/expense/$ID
+
 ```
 
 Retorno:
@@ -140,13 +144,13 @@ Retorno:
 Endpoint: POST `/api/expense`
 
 ```sh
-curl -X -H POST 'http://localhost:8000/api/expense' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer seu_token_aqui' \
---data-raw '{
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d \
+'{
 	"value": "20",
 	"description": "netflix"
-}'
+}' \
+http://localhost/api/expense
+
 ```
 
 Retorno:
@@ -170,13 +174,13 @@ Retorno:
 Endpoint: PUT `/api/expense/{id}`
 
 ```sh
-curl -X -H PUT 'http://localhost:8000/api/expense/$EXPENSE_ID' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer seu_token_aqui' \
---data-raw '{
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d \
+'{
 	"value": "30",
 	"description": "Nova descrição"
-}'
+}' \
+http://localhost:8000/api/expense/$ID
+
 ```
 Retorno:
 
@@ -196,8 +200,9 @@ Retorno:
 Endpoint: DELETE `/api/expense/{id}`
 
 ```sh
-curl -X -H DELETE 'http://localhost:8000/api/expense/$EXPENSE_ID' \
---header 'Authorization: Bearer seu_token_aqui'
+curl -X DELETE -H "Authorization: Bearer seu_token_aqui" \
+http://localhost:8000/api/expense/$id
+
 ```
 
 Retorno:

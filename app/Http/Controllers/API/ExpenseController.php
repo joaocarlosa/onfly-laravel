@@ -10,6 +10,8 @@ use App\Notifications\ExpenseCreated;
 
 class ExpenseController extends Controller
 {
+    
+
     public function index()
     {
         return Expense::all();
@@ -20,12 +22,13 @@ class ExpenseController extends Controller
         $request->validate([
             'description' => 'required',
             'value' => 'required',
-        ]);        
+        ]);
+
         $expense->description = $request->description;
         $expense->value = $request->value;
         $expense->user_id = $request->user()->id;
         $expense->save();
-        
+
         try {
             $request->user()->notify(new ExpenseCreated($expense));
             $notifyMessage = 'Sent with success';
@@ -34,18 +37,15 @@ class ExpenseController extends Controller
         }
 
         return response()->json(['expense' => $expense, 'emailMessage' => $notifyMessage], 201);
-
     }
 
     public function show(Expense $expense)
-    {   
-
+    {
         return response()->json($expense);
     }
 
     public function update(ExpenseRequest $request, $id)
-    {
-        
+    {        
         $expense = Expense::where('id', $id)
                             ->where('user_id', auth()->id())
                             ->firstOrFail();
@@ -59,8 +59,7 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense)
     {
         $expense->delete();
-
         return response()->json(['success' => 'successfully deleted'], 200);
-
     }
+
 }

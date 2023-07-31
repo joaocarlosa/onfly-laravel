@@ -7,10 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
-use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\PersonalAccessToken;
-use App\Http\Middleware\CheckUserToken;
 
 
 class UserController extends Controller
@@ -18,8 +15,10 @@ class UserController extends Controller
 
     public function show(Request $request)
     {
-        $user = $request->user()->makeHidden(['password']);
         
+        $user = $request->user()->makeHidden(['password']);
+        $this->authorize('view', $user);
+
         return $user;
     }
 

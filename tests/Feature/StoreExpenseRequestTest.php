@@ -11,7 +11,7 @@ class StoreExpenseRequestTest extends TestCase
     {
         $data = [
             'value' => 'invalid_value',
-            'description' => str_repeat('a', 192), // maior que o máximo permitido (191 caracteres)
+            'description' => str_repeat('a', 192),
             'created_at' => 'invalid_date',
             'updated_at' => 'invalid_date',
         ];

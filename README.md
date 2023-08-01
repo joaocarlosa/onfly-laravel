@@ -23,7 +23,7 @@ php artisan key:generate
 
 ## Autenticação
 
-Todos os endpoints, com exceção do POST `/api/users/new`, exigem autenticação por meio de Bearer Token que deve ser enviado no header da requisição.
+Todos os endpoints, com exceção do POST `/api/users`, exigem autenticação por meio de Bearer Token que deve ser enviado no header da requisição.
 
 ## Endpoints
 
@@ -31,7 +31,7 @@ Todos os endpoints, com exceção do POST `/api/users/new`, exigem autenticaçã
 
 Cria um novo usuário.
 
-Endpoint: POST `/api/users/new`
+Endpoint: POST `/api/users`
 
 ```sh
 curl -X POST -H "Content-Type: application/json" -d
@@ -40,7 +40,7 @@ curl -X POST -H "Content-Type: application/json" -d
     "email": "user@email.com",
     "password": "pass"
 }'
-http://localhost:8000/api/users/new
+http://localhost:8000/api/users
 
 
 ```
@@ -49,22 +49,24 @@ Retorno:
 ```json
 {
 "user": {
-    "id": 25,
-    "name": "user",
-    "email": "user@email.com"
+    "name": "User",
+    "email": "user@example.com",
+    "updated_at": "2023-08-01T21:39:55.000000Z",
+    "created_at": "2023-08-01T21:39:55.000000Z",
+    "id": 12
 },
-"token": "token"
+"token": "your_token"
 }
 ```
 
 ### Recuperar informações do usuário
 Obtenha informações sobre o usuário logado.
 
-Endpoint: GET `/api/users/me`
+Endpoint: GET `/api/users`
 
 ```sh
 curl -X GET -H "Authorization: Bearer seu_token_aqui"
-http://localhost:8000/api/users/me
+http://localhost:8000/api/users
 
 ```
 Retorno:
@@ -79,6 +81,43 @@ Retorno:
 "created_at": "2023-07-30T08:13:32.000000Z",
 "updated_at": "2023-07-30T08:13:32.000000Z"
 }
+```
+
+### Atualizar informações do usuário
+Atualize informações sobre o usuário logado.
+
+Endpoint: PUT `/api/users`
+
+```sh
+curl -X PUT -H "Content-Type: application/json" -d
+'{
+	"name": "user",
+    "password": "pass"
+}'
+http://localhost:8000/api/users
+
+Retorno:
+
+```json
+{
+"data": {
+    "id": 1,
+    "name": "user",
+    "email": "user@example.com",
+    "created_at": "2023-08-01T23:28:14.000000Z",
+    "updated_at": "2023-08-01T23:28:49.000000Z"
+}
+}
+```
+### Deletar o usuário
+Exclua o usuário logado.
+
+Endpoint: DELETE `/api/users`
+
+```sh
+curl -X DELETE -H "Authorization: Bearer seu_token_aqui"
+http://localhost:8000/api/users
+
 ```
 
 #### Despesas:

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\StoreUserRequest;
 
 
 class UserController extends Controller
@@ -13,20 +14,13 @@ class UserController extends Controller
     
     public function index()
     {   
-        return UserResource::collection(User::all());
-
+        $users = User::all();
+        return UserResource::collection($users);
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
-
-        $user = User::create($request->all());
-
+        $user = User::create($request->validated());
         return new UserResource($user);
     }
 
@@ -35,24 +29,15 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    // Atualizar usuário
-    public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required|min:8',
-        ]);
-
-        $user->update($request->all());
-
+    public function update(StoreUserRequest $request, User $user)
+    {   
+        $user->update($request->validated());
         return new UserResource($user);
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-
-        return new UserResource($user);
+        return response()->json(null, 204);
     }
 }

@@ -7,48 +7,49 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ExpenseResource;
 use Illuminate\Http\Request;
 use App\Notifications\ExpenseCreated;
+use App\Http\Requests\StoreExpenseRequest;
 
 class ExpenseController extends Controller
 {
     public function index()
     {
-        return ExpenseResource::collection(Expense::all());
+        $expenses = Expense::all();
+        return ExpenseResource::collection($expenses);
     }
 
-    public function store(Request $request)
+    public function store(StoreExpenseRequest $request)
     {
-        $expense = Expense::create($request->all());
+        $validatedData = $request->validated();
+        $expense = Expense::create($validatedData);
 
         try {
             $expense->user->notify(new ExpenseCreated($expense));
         } catch (\Exception $e) {
             return (new ExpenseResource($expense))->additional([
-                'error' => 'Erro ao enviar notificação de email',
+                'error' => 'Error sending email notification',
                 'message' => $e->getMessage(),
             ]);
         }
 
         return new ExpenseResource($expense);
     }
-    
 
     public function show(Expense $expense)
     {
         return new ExpenseResource($expense);
     }
 
-    public function update(Request $request, Expense $expense)
+    public function update(StoreExpenseRequest $request, Expense $expense)
     {
-        $expense->update($request->all());
-
+        $expense->update($request->validated());
         return new ExpenseResource($expense);
     }
 
     public function destroy(Expense $expense)
     {
         $expense->delete();
-
-        return response()->json(null, 204);
+        return response()->json('Successful', 204);
     }
+
 }
 

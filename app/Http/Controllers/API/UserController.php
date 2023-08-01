@@ -7,36 +7,53 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Access\AuthorizationException;
+use App\Http\Requests\UpdateUserRequest;
+
 
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('store');
+    }
     
     public function index()
     {   
-        $users = User::all();
-        return UserResource::collection($users);
+        $user = auth()->user();
+        return new UserResource($user);
     }
 
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->validated());
-        return new UserResource($user);
+        $validatedData = $request->validated();
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        $user = User::create($validatedData);
+        $token = $user->createToken('api-token')->plainTextToken;
+        
+        return response()->json([
+            'user' => $user,
+            'token' => $token,
+        ], 201);
     }
 
-    public function show(User $user)
-    {
-        return new UserResource($user);
-    }
-
-    public function update(StoreUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request)
     {   
-        $user->update($request->validated());
+        $user = auth()->user();
+        $user->name = $request->validated()['name'];
+        $user->password = Hash::make($request->validated()['password']);
+        $user->save();
+
         return new UserResource($user);
     }
 
     public function destroy(User $user)
     {
+        $user = auth()->user();
         $user->delete();
         return response()->json(null, 204);
     }

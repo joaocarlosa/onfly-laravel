@@ -6,6 +6,7 @@ use App\Models\Expense;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExpenseResource;
 use Illuminate\Http\Request;
+use App\Notifications\ExpenseCreated;
 
 class ExpenseController extends Controller
 {
@@ -18,8 +19,18 @@ class ExpenseController extends Controller
     {
         $expense = Expense::create($request->all());
 
+        try {
+            $expense->user->notify(new ExpenseCreated($expense));
+        } catch (\Exception $e) {
+            return (new ExpenseResource($expense))->additional([
+                'error' => 'Erro ao enviar notificação de email',
+                'message' => $e->getMessage(),
+            ]);
+        }
+
         return new ExpenseResource($expense);
     }
+    
 
     public function show(Expense $expense)
     {

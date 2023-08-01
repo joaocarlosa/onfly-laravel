@@ -27,7 +27,7 @@ class UserController extends Controller
 
         $user = User::create($request->all());
 
-        return response()->json($user, 201);
+        return new UserResource($user);
     }
 
     public function show(User $user)
@@ -46,14 +46,13 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return response()->json($user, 200);
+        return new UserResource($user);
     }
 
-    // Deletar usuário
     public function destroy(User $user)
     {
         $user->delete();
 
-        return response()->json(null, 204);
+        return new UserResource($user);
     }
 }

@@ -18,7 +18,6 @@ class StoreExpenseRequest extends FormRequest
         return [
             'value' => 'required|numeric|min:0',
             'description' => 'required|max:191',
-            'user_id' => 'required|exists:users,id',
             'created_at' => 'nullable|date',
             'updated_at' => 'nullable|date',
         ];

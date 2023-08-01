@@ -8,19 +8,24 @@ use App\Http\Resources\ExpenseResource;
 use Illuminate\Http\Request;
 use App\Notifications\ExpenseCreated;
 use App\Http\Requests\StoreExpenseRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::all();
+        $user = Auth::user();
+        $expenses = $user->expenses;
         return ExpenseResource::collection($expenses);
     }
 
     public function store(StoreExpenseRequest $request)
-    {
-        $validatedData = $request->validated();
-        $expense = Expense::create($validatedData);
+    {   
+        $this->authorize('create', Expense::class);
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $expense = Expense::create($data);        
 
         try {
             $expense->user->notify(new ExpenseCreated($expense));
@@ -36,17 +41,20 @@ class ExpenseController extends Controller
 
     public function show(Expense $expense)
     {
+        $this->authorize('view', $expense);
         return new ExpenseResource($expense);
     }
 
     public function update(StoreExpenseRequest $request, Expense $expense)
-    {
-        $expense->update($request->validated());
+    {        
+        $this->authorize('update', $expense);        
+        $expense->update($request->validated());        
         return new ExpenseResource($expense);
     }
 
     public function destroy(Expense $expense)
     {
+        $this->authorize('delete', $expense);
         $expense->delete();
         return response()->json('Successful', 204);
     }

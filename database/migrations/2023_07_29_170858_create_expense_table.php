@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expense', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->string('description', 191);
             $table->foreignId('user_id')->constrained();
             $table->decimal('value', 8, 2);
             $table->timestamps();
+            
         });
     }
 

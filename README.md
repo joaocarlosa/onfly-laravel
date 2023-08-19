@@ -126,12 +126,12 @@ http://localhost:8000/api/users
 Para acessar os seguintes endpoints, é necessário passar o token de autenticação do usuário.
 
 Recuperar todas as despesas
-Endpoint: GET `/api/expense`
+Endpoint: GET `/api/expenses`
 
 
 ```sh
 curl -X GET -H "Authorization: Bearer seu_token_aqui"
-http://localhost:8000/api/expense
+http://localhost:8000/api/expenses
 
 ```
 
@@ -158,11 +158,11 @@ Retorno:
 ```
 
 ### Recuperar uma despesa específica
-Endpoint: GET `/api/expense/{id}`
+Endpoint: GET `/api/expenses/{id}`
 
 ```sh
 curl -X GET -H "Authorization: Bearer seu_token_aqui"
-http://localhost:8000/api/expense/$ID
+http://localhost:8000/api/expenses/$ID
 
 ```
 
@@ -181,7 +181,7 @@ Retorno:
 
 
 ### Criar uma nova despesa
-Endpoint: POST `/api/expense`
+Endpoint: POST `/api/expenses`
 
 ```sh
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d
@@ -189,7 +189,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer seu_t
 	"value": "20",
 	"description": "netflix"
 }'
-http://localhost/api/expense
+http://localhost/api/expenses
 
 ```
 
@@ -211,7 +211,7 @@ Retorno:
 
 
 ### Atualizar uma despesa existente
-Endpoint: PUT `/api/expense/{id}`
+Endpoint: PUT `/api/expenses/{id}`
 
 ```sh
 curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer seu_token_aqui" -d
@@ -219,7 +219,7 @@ curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer seu_to
 	"value": "30",
 	"description": "Nova descrição"
 }'
-http://localhost:8000/api/expense/$ID
+http://localhost:8000/api/expenses/$ID
 
 ```
 Retorno:
@@ -237,11 +237,11 @@ Retorno:
 ```
 
 ### Remover uma despesa
-Endpoint: DELETE `/api/expense/{id}`
+Endpoint: DELETE `/api/expenses/{id}`
 
 ```sh
 curl -X DELETE -H "Authorization: Bearer seu_token_aqui"
-http://localhost:8000/api/expense/$ID
+http://localhost:8000/api/expenses/$ID
 
 ```
 

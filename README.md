@@ -95,6 +95,7 @@ curl -X PUT -H "Content-Type: application/json" -d
     "password": "pass"
 }'
 http://localhost:8000/api/users
+```
 
 Retorno:
 
